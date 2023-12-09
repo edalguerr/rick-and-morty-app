@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/scss/index";
+
+body {
+    background: map-get($colors, grey-900-98) url(./assets/images/bg-body.png) repeat-y 50% -160px;
+    font-family: Poppins;
+    font-size: 16px;
+}
+
+span.external-higlight {
+    color: map-get($colors, primary-400);
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+
+    &:hover:after {
+        width: 100%;
+    }
+
+    &:after {
+        content: "";
+        background: map-get($colors, primary-400);
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 4px;
+        z-index: -1;
+        -webkit-transition: 0.3s cubic-bezier(0.75, 0.25, 0.25, 0.75);
+        -o-transition: 0.3s cubic-bezier(0.75, 0.25, 0.25, 0.75);
+        transition: 0.3s cubic-bezier(0.75, 0.25, 0.25, 0.75);
+    }
+}
+
+div.ngneat-dialog-backdrop {
+    padding: 0;
+}
+
+@media screen and (max-width: 600px) {
+    div.ngneat-dialog-content {
+        width: 80vw !important;
+        max-width: 370px;
+    }
+}

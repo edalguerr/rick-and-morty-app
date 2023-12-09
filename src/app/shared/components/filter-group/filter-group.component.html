@@ -1,0 +1,20 @@
+<div class="segmented-control">
+  <ng-container *ngFor="let option of optionList">
+    <div
+      class="segmented-group"
+      [ngClass]="{ 'segmented-group--active': isActiveOption(option.label) }"
+    >
+      <input
+        type="radio"
+        [formControl]="formControl"
+        [name]="filter"
+        [id]="option.id + option.label"
+        [value]="option.label"
+        class="segmented-input"
+      />
+      <label [for]="option.id + option.label" class="segmented-label">
+        {{ option.label }}
+      </label>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,46 @@
+@import "colors";
+
+.segmented {
+    &-control {
+        align-items: center;
+        background: map-get($colors, black-20);
+        border-radius: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0.5rem;
+        position: relative;
+    }
+
+    &-group {
+        position: relative;
+        text-align: center;
+        z-index: 2;
+
+        &--active {
+            background: map-get($colors, primary-400);
+            border-radius: 0.5rem;
+        }
+    }
+
+    &-input {
+        display: none;
+        & ~ label {
+            cursor: pointer;
+        }
+        &:checked {
+            & ~ label {
+                color: map-get($colors, grey-50);
+            }
+        }
+    }
+
+    &-label {
+        color: map-get($colors, grey-400);
+        display: block;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.5rem;
+        padding: 0.5rem 2rem;
+    }
+}

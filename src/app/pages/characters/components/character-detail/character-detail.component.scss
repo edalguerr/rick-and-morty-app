@@ -1,0 +1,44 @@
+@import "colors";
+
+.modal {
+    &-content {
+        background-color: map-get($colors, grey-900-98);
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 2rem 1rem 0.5rem;
+        width: 35%;
+
+        &__label {
+            color: map-get($colors, grey-400);
+            font-size: 12px;
+        }
+
+        &__feature {
+            margin: 0;
+            padding: 0;
+            color: map-get($colors, grey-50);
+            font-size: 20px;
+            font-weight: 900;
+            text-shadow: 1px 1px 2px black;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .modal {
+        &-content {
+            padding-top: 40px;
+        }
+        
+        &-info {
+            padding-bottom: 1.2rem;
+            width: 90%;
+        }
+    }
+}

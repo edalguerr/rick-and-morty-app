@@ -1,0 +1,12 @@
+<header class="header">
+  <div class="header-container">
+    <h1 class="header__title">{{ title | translate }}</h1>
+    <p class="header__description" [innerHTML]="description | translate"></p>
+    <div class="header-search">
+      <ng-content select="[search-filter]" />
+    </div>
+  </div>
+  <div class="header-filters header-container header-container--xl">
+    <ng-content select="[filter-groups]" />
+  </div>
+</header>

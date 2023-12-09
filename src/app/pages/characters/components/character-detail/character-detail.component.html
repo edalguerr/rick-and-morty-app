@@ -1,0 +1,40 @@
+<div class="modal-content">
+  <app-card-preview [data]="characterData" />
+  <div class="modal-info">
+    <div class="modal-info-item">
+      <span class="modal-info__label">{{
+        detailMessages + "specie" | translate
+      }}</span>
+      <p class="modal-info__feature">
+        {{ characterData?.species }}
+      </p>
+    </div>
+
+    <div class="modal-info-item">
+      <span class="modal-info__label">{{
+        detailMessages + "gender" | translate
+      }}</span>
+      <p class="modal-info__feature">
+        {{ characterData?.gender }}
+      </p>
+    </div>
+
+    <div class="modal-info-item">
+      <span class="modal-info__label">{{
+        detailMessages + "origin" | translate
+      }}</span>
+      <p class="modal-info__feature">
+        {{ characterData?.origin?.name }}
+      </p>
+    </div>
+
+    <div class="modal-info-item">
+      <span class="modal-info__label">{{
+        detailMessages + "location" | translate
+      }}</span>
+      <p class="modal-info__feature">
+        {{ characterData?.location?.name }}
+      </p>
+    </div>
+  </div>
+</div>

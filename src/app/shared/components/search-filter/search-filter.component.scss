@@ -1,0 +1,67 @@
+@import "colors";
+.search {
+    position: relative;
+    border-radius: 12px;
+    margin-bottom: 8px;
+
+    &-icon {
+        display: inline-block;
+        height: 24px;
+        left: 16px;
+        position: absolute;
+        top: 18px;
+    }
+
+    &__control {
+        appearance: none;
+        background: map-get($colors, black-10);
+        border-radius: 12px;
+        border: 2px solid map-get($colors, grey-800);
+        box-sizing: border-box;
+        color: map-get($colors, grey-400);
+        font-size: 16px;
+        height: 64px;
+        line-height: 20px;
+        outline: none;
+        padding: 28px 16px 12px 56px;
+        width: 100%;
+        z-index: 3;
+
+        &:focus {
+            border-color: map-get($colors, primary-400);
+            & + label {
+                transform: translateY(-12px);
+                color: map-get($colors, grey-400);
+            }
+
+            &::placeholder {
+                opacity: 1;
+            }
+        }
+
+        &::placeholder {
+            opacity: 0;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        top: 24px;
+        left: 56px;
+        font-size: 14px;
+        line-height: 16px;
+        color: map-get($colors, grey-600);
+        transform: translateY(0);
+        transform-origin: 0;
+        transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        cursor: text;
+    }
+
+    &__icon {
+        svg {
+            display: block;
+            fill: none;
+            stroke: map-get($colors, grey-400);
+        }
+    }
+}

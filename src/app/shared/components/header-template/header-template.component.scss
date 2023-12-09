@@ -1,0 +1,42 @@
+@import "colors";
+@import "sizes";
+.header {
+    &-container {        
+        max-width: 600px;
+        width: 100%;
+
+        &--xl {
+            max-width: 1200px;
+        }
+
+        @media screen and (min-width: map-get($breakpoints, xxl)) {
+            margin: 0 auto;
+        }
+    }
+
+    &__title {
+        color: map-get($colors, grey-50);
+        font-size: 4rem;
+        font-weight: 600;
+        line-height: 5rem;
+    }
+
+    &__description {
+        color: map-get($colors, grey-400);
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.5rem;
+    }
+
+    &-search {
+        margin-top: 24px;
+    }
+
+    &-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        row-gap: 1rem;
+        margin-top: 50px;
+    }
+}
