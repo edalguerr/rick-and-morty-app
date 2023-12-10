@@ -1,0 +1,89 @@
+<div class="content-wrapper">
+  <app-header-template>
+    <app-search-filter
+      search-filter
+      [formControl]="nameField"
+      [searchInputMessages]="searchInputMessages"
+    />
+  </app-header-template>
+
+  <main class="main-content">
+    <ul
+      class="content-list"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()"
+    >
+      <ng-container *ngIf="firstLoading">
+        <ngx-skeleton-loader
+          count="6"
+          appearance="circle"
+          animation="pulse"
+          [theme]="{
+            width: '320px',
+            aspectRatio: '5/2.5',
+            height: 'auto',
+            borderRadius: '0.75rem'
+          }"
+        ></ngx-skeleton-loader>
+      </ng-container>
+
+      <li *ngFor="let item of items" class="list-item">
+        <app-card-preview-text
+          [data]="{ title: item.name, description: item.episode }"
+          [detailMessages]="detailMessagesObj"
+          (click)="showDetail(item)"
+        >
+          <i class="card-icon" card-icon>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="18"
+              viewBox="0 0 1024 1024"
+              class="icon"
+              version="1.1"
+            >
+              <path
+                d="M892.9 145.2H130.1c-33.5 0-60.7 27.2-60.7 60.7v503.4c0 33.4 27.2 60.7 60.7 60.7h762.8c33.5 0 60.7-27.2 60.7-60.7V205.8c0-33.4-27.3-60.6-60.7-60.6z m8.7 564.1c0 4.8-3.9 8.7-8.7 8.7H130.1c-4.8 0-8.7-3.9-8.7-8.7V205.8c0-4.8 3.9-8.7 8.7-8.7h762.8c4.8 0 8.7 3.9 8.7 8.7v503.5zM719.3 823.9h-416c-14.4 0-26 11.6-26 26s11.6 26 26 26h416.1c14.4 0 26-11.6 26-26s-11.7-26-26.1-26z m-83.2-384.8l-173.4-104c-8-4.8-18-4.9-26.2-0.3-8.1 4.6-13.2 13.3-13.2 22.6v208c0 9.4 5 18 13.2 22.6 4 2.3 8.4 3.4 12.8 3.4 4.6 0 9.3-1.3 13.4-3.7l173.4-104c7.8-4.7 12.6-13.2 12.6-22.3 0-9.1-4.8-17.6-12.6-22.3z"
+              />
+            </svg>
+          </i>
+        </app-card-preview-text>
+      </li>
+
+      <ng-container *ngIf="loading">
+        <ngx-skeleton-loader
+          count="6"
+          appearance="circle"
+          animation="pulse"
+          [theme]="{
+            width: '320px',
+            aspectRatio: '5/2.5',
+            height: 'auto',
+            borderRadius: '0.75rem'
+          }"
+        ></ngx-skeleton-loader>
+      </ng-container>
+    </ul>
+
+    <button
+      class="button-back"
+      aria-label="Go up button"
+      *ngIf="showBackButton"
+      (click)="scrollUp()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="34px"
+        height="34px"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path
+          d="M16.1795 3.26875C15.7889 2.87823 15.1558 2.87823 14.7652 3.26875L8.12078 9.91322C6.94952 11.0845 6.94916 12.9833 8.11996 14.155L14.6903 20.7304C15.0808 21.121 15.714 21.121 16.1045 20.7304C16.495 20.3399 16.495 19.7067 16.1045 19.3162L9.53246 12.7442C9.14194 12.3536 9.14194 11.7205 9.53246 11.33L16.1795 4.68297C16.57 4.29244 16.57 3.65928 16.1795 3.26875Z"
+        />
+      </svg>
+    </button>
+  </main>
+</div>

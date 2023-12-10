@@ -34,19 +34,32 @@ export default {
       locations: {
         header: {
           searchFilter: {
-            label: 'Search for location',
+            label: 'Search by location',
             placeholder: 'eg. Citadel of Ricks',
           },
         },
         infoLabels: {
           name: 'Name',
           type: 'Type',
-          dimension: 'Dimension'
+          dimension: 'Dimension',
+        },
+      },
+      episodes: {
+        header: {
+          searchFilter: {
+            label: 'Search by episode',
+            placeholder: 'eg. The Ricklantis Mixup',
+          },
+        },
+        infoLabels: {
+          name: 'Name',
+          episode: 'Episode',
+          air_date: 'Air date',
         },
       },
     },
     buttons: {
-      cleanFilter: 'Clean',
+      cleanFilter: 'Clear',
     },
   },
 };

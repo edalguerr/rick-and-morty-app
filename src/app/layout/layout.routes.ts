@@ -14,6 +14,10 @@ const routes: Route[] = [
         path: 'locations',
         loadComponent: () => import('../pages/locations/locations.component'),
       },
+      {
+        path: 'episodes',
+        loadComponent: () => import('../pages/episodes/episodes.component'),
+      },
     ],
   },
 ];

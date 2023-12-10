@@ -43,6 +43,19 @@ export default {
           dimension: 'Dimension',
         },
       },
+      episodes: {
+        header: {
+          searchFilter: {
+            label: 'Buscar por episodio',
+            placeholder: 'eg. The Ricklantis Mixup',
+          },
+        },
+        infoLabels: {
+          name: 'Nombre',
+          episode: 'Episodio',
+          air_date: 'Fecha de emisión',
+        },
+      },
     },
     buttons: {
       cleanFilter: 'Limpiar',

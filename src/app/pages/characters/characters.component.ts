@@ -81,7 +81,7 @@ export default class CharactersComponent extends MasterList implements OnInit {
       const subNameFilter = this.nameField.valueChanges
         .pipe(debounceTime(500), distinctUntilChanged())
         .subscribe((value) => {
-          if (value && !this.cleaningFilters) {
+          if (!this.cleaningFilters) {
             this.search();
           }
         });
