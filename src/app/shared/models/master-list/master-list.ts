@@ -108,6 +108,7 @@ export abstract class MasterList implements OnDestroy, OnInit {
         error: () => {
           this.firstLoading = false;
           this.loading = false;
+          this.items = [];
         },
       });
     this.subscriptions.push(sub);

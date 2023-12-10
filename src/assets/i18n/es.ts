@@ -30,6 +30,19 @@ export default {
           location: 'Ubicación',
         },
       },
+      locations: {
+        header: {
+          searchFilter: {
+            label: 'Buscar por ubicación',
+            placeholder: 'eg. Citadel of Ricks',
+          },
+        },
+        infoLabels: {
+          name: 'Nombre',
+          type: 'Tipo',
+          dimension: 'Dimension',
+        },
+      },
     },
     buttons: {
       cleanFilter: 'Limpiar',

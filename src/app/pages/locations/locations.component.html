@@ -1,0 +1,114 @@
+<div class="content-wrapper">
+  <app-header-template>
+    <app-search-filter
+      search-filter
+      [formControl]="nameField"
+      [searchInputMessages]="searchInputMessages"
+    />
+
+    <ng-container filter-groups>
+      <app-filter-group
+        filter="status"
+        [optionList]="dependencyItems.type"
+        [formControl]="getFormControl('type')"
+      />
+      <app-filter-group
+        filter="species"
+        [optionList]="dependencyItems.dimension"
+        [formControl]="getFormControl('dimension')"
+      />
+
+      <button class="button-filter--clear" (click)="clearFilter()">
+        {{ "app.buttons.cleanFilter" | translate }}
+      </button>
+    </ng-container>
+  </app-header-template>
+
+  <main class="main-content">
+    <ul
+      class="content-list"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()"
+    >
+      <ng-container *ngIf="firstLoading">
+        <ngx-skeleton-loader
+          count="6"
+          appearance="circle"
+          animation="pulse"
+          [theme]="{
+            width: '320px',
+            aspectRatio: '5/2.5',
+            height: 'auto',
+            borderRadius: '0.75rem'
+          }"
+        ></ngx-skeleton-loader>
+      </ng-container>
+
+      <li *ngFor="let item of items" class="list-item">
+        <app-card-preview-text
+          [data]="{ title: item.name, description: item.type }"
+          [detailMessages]="detailMessagesObj"
+          (click)="showDetail(item)"
+        >
+          <i class="card-icon" card-icon>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="18"
+              viewBox="0 0 16 18"
+              fill="none"
+            >
+              <path
+                d="M14.5 7.54545C14.5 12.6364 8 17 8 17C8 17 1.5 12.6364 1.5 7.54545C1.5 5.80949 2.18482 4.14463 3.40381 2.91712C4.62279 1.68961 6.27609 1 8 1C9.72391 1 11.3772 1.68961 12.5962 2.91712C13.8152 4.14463 14.5 5.80949 14.5 7.54545Z"
+                stroke-width="1.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M8 9.72721C9.19662 9.72721 10.1667 8.75038 10.1667 7.54539C10.1667 6.34041 9.19662 5.36357 8 5.36357C6.80338 5.36357 5.83333 6.34041 5.83333 7.54539C5.83333 8.75038 6.80338 9.72721 8 9.72721Z"
+                stroke-width="1.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </i>
+        </app-card-preview-text>
+      </li>
+
+      <ng-container *ngIf="loading">
+        <ngx-skeleton-loader
+          count="6"
+          appearance="circle"
+          animation="pulse"
+          [theme]="{
+            width: '320px',
+            aspectRatio: '5/2.5',
+            height: 'auto',
+            borderRadius: '0.75rem'
+          }"
+        ></ngx-skeleton-loader>
+      </ng-container>
+    </ul>
+
+    <button
+      class="button-back"
+      aria-label="Go up button"
+      *ngIf="showBackButton"
+      (click)="scrollUp()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="34px"
+        height="34px"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path
+          d="M16.1795 3.26875C15.7889 2.87823 15.1558 2.87823 14.7652 3.26875L8.12078 9.91322C6.94952 11.0845 6.94916 12.9833 8.11996 14.155L14.6903 20.7304C15.0808 21.121 15.714 21.121 16.1045 20.7304C16.495 20.3399 16.495 19.7067 16.1045 19.3162L9.53246 12.7442C9.14194 12.3536 9.14194 11.7205 9.53246 11.33L16.1795 4.68297C16.57 4.29244 16.57 3.65928 16.1795 3.26875Z"
+        />
+      </svg>
+    </button>
+  </main>
+</div>

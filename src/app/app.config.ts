@@ -11,8 +11,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(TranslateModule.forRoot()),
     provideHttpClient(),
-    provideDialogConfig({
-      
-    })
+    provideDialogConfig({})
   ],
 };

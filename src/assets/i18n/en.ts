@@ -25,15 +25,28 @@ export default {
           },
         },
         details: {
-          specie: 'Specie',          
+          specie: 'Specie',
           gender: 'Gender',
           origin: 'Origin',
-          location: 'Location'
-        }        
+          location: 'Location',
+        },
+      },
+      locations: {
+        header: {
+          searchFilter: {
+            label: 'Search for location',
+            placeholder: 'eg. Citadel of Ricks',
+          },
+        },
+        infoLabels: {
+          name: 'Name',
+          type: 'Type',
+          dimension: 'Dimension'
+        },
       },
     },
     buttons: {
-      cleanFilter: 'Clean'
-    }
+      cleanFilter: 'Clean',
+    },
   },
 };

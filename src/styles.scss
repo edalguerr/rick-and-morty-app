@@ -36,9 +36,23 @@ div.ngneat-dialog-backdrop {
     padding: 0;
 }
 
+div.ngneat-dialog-content {
+    background: none;
+}
+
 @media screen and (max-width: 600px) {
     div.ngneat-dialog-content {
         width: 80vw !important;
         max-width: 370px;
+    }
+}
+
+.main-content {
+    max-width: 1400px;
+}
+
+@media screen and (min-width: 1440px) {
+    .main-content {
+        margin: 0 auto;
     }
 }

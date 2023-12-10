@@ -10,6 +10,10 @@ const routes: Route[] = [
         path: '',
         loadComponent: () => import('../pages/characters/characters.component'),
       },
+      {
+        path: 'locations',
+        loadComponent: () => import('../pages/locations/locations.component'),
+      },
     ],
   },
 ];

@@ -1,0 +1,28 @@
+<div class="card-preview">
+  <div class="card-info">
+    <div class="card-info-item">
+      <span class="card-info__label">{{
+        detailMessages.title | translate
+      }}</span>
+      <p class="card-info__title">{{ data?.title }}</p>
+    </div>
+    <div class="card-info-item">
+      <span class="card-info__label">{{
+        detailMessages.description | translate
+      }}</span>
+      <p class="card-info__description">{{ data?.description }}</p>
+    </div>
+    <div
+      class="card-info-item"
+      *ngIf="detailMessages.additional && data.additional"
+    >
+      <span class="card-info__label">{{
+        detailMessages.additional | translate
+      }}</span>
+      <p class="card-info__description">{{ data.additional }}</p>
+    </div>
+    <span class="card-icon-wrapper">
+      <ng-content select="[card-icon]"></ng-content>
+    </span>
+  </div>
+</div>

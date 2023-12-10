@@ -1,3 +1,4 @@
 export const PATHS = {
-    characters: 'character'
-}
+  characters: 'character',
+  locations: 'location',
+};
