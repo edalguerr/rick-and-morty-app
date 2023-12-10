@@ -1,10 +1,10 @@
 import { Component, Input, Optional } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-card-preview',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './card-preview.component.html',
   styleUrls: ['./card-preview.component.scss'],
 })

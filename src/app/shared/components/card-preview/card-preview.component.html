@@ -18,7 +18,13 @@
       </i>
     </div>
     <div class="card-image">
-      <img [src]="data?.image" alt="Ted Lasso" width="300" height="318" />
+      <img
+        [ngSrc]="data?.image"
+        alt="Ted Lasso"
+        width="300"
+        height="318"
+        [priority]="data.id <= 3"
+      />
     </div>
     <div class="card-info">
       <span class="card-info__title">{{ data?.name }}</span>

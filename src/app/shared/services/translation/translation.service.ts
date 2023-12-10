@@ -1,15 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ILocale } from '../../interfaces/locale';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TranslationService {
   private defaultLang = 'en';
+  isBrowser = false;
 
-  constructor(private translateService: TranslateService) {
+  constructor(
+    private translateService: TranslateService,
+    @Inject(PLATFORM_ID) private platformId: any
+  ) {
     this.translateService.setDefaultLang(this.getDefaultLanguage());
+    this.isBrowser = isPlatformBrowser(platformId);
   }
 
   loadTranslations(...locales: ILocale[]): void {
@@ -25,25 +31,30 @@ export class TranslationService {
   setLanguage(lang: string): void {
     if (lang) {
       this.translateService.use(lang);
-      localStorage.setItem('lang', lang);
+      if (this.isBrowser) localStorage.setItem('lang', lang);
       return;
     }
 
     this.translateService.use(this.getSelectedLanguage());
-    localStorage.setItem('lang', this.getSelectedLanguage());
+    if (this.isBrowser) localStorage.setItem('lang', this.getSelectedLanguage());
   }
 
   getSelectedLanguage(): string {
-    return (
-      localStorage.getItem('lang') || this.translateService.getDefaultLang()
-    );
+    return this.isBrowser
+      ? localStorage.getItem('lang') || this.translateService.getDefaultLang()
+      : this.translateService.getDefaultLang();
   }
 
-  getDefaultLanguage(): string {    
+  getDefaultLanguage(): string {
     const browserLang = this.translateService.getBrowserLang();
-    return (
-      localStorage.getItem('lang') ||
-      (browserLang?.match(/en|es/) ? browserLang : this.defaultLang)
-    );
+
+    if (this.isBrowser) {
+      return (
+        localStorage.getItem('lang') ||
+        (browserLang?.match(/en|es/) ? browserLang : this.defaultLang)
+      );
+    }
+
+    return browserLang?.match(/en|es/) ? browserLang : this.defaultLang;
   }
 }
