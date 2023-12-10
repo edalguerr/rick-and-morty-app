@@ -3,9 +3,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DialogService } from '@ngneat/dialog';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { MasterList } from 'src/app/shared/models/master-list/master-list';
-import { HttpService } from 'src/app/shared/services/http/http.service';
-import { environment } from 'src/environments/development';
 import { HeaderTemplateComponent } from '../../shared/components/header-template/header-template.component';
 import { SearchFilterComponent } from '../../shared/components/search-filter/search-filter.component';
 import { FilterGroupComponent } from '../../shared/components/filter-group/filter-group.component';
@@ -15,6 +12,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CardPreviewTextComponent } from '../../shared/components/card-preview-text/card-preview-text.component';
 import { LocationDetailComponent } from './components/location-detail/location-detail.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { environment } from '../../../environments/development';
+import { MasterList } from '../../shared/models/master-list/master-list';
+import { HttpService } from '../../shared/services/http/http.service';
 
 const paths = environment.paths;
 @Component({

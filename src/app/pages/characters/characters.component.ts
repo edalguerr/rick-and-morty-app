@@ -5,9 +5,6 @@ import { SearchFilterComponent } from '../../shared/components/search-filter/sea
 import { FilterGroupComponent } from '../../shared/components/filter-group/filter-group.component';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { CardPreviewComponent } from '../../shared/components/card-preview/card-preview.component';
-import { MasterList } from 'src/app/shared/models/master-list/master-list';
-import { HttpService } from 'src/app/shared/services/http/http.service';
-import { environment } from 'src/environments/development';
 import dependencyFilters from './model/dependency-filters';
 import { TranslateModule } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
@@ -15,6 +12,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { DialogService } from '@ngneat/dialog';
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
+import { environment } from '../../../environments/development';
+import { MasterList } from '../../shared/models/master-list/master-list';
+import { HttpService } from '../../shared/services/http/http.service';
 
 const paths = environment.paths;
 
