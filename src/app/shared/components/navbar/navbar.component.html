@@ -14,7 +14,11 @@
       [ngClass]="{ 'menu-wrapper--active': isActiveMobileMenu }"
     >
       <div class="menu-container">
-        <button class="menu-close menu-item" (click)="onShowMobileMenu(false)">
+        <button
+          class="menu-close menu-item"
+          (click)="onShowMobileMenu(false)"
+          aria-label="Close menu button"
+        >
           <i class="icon-close">
             <svg width="24" height="24" viewBox="0 0 24 24">
               <path
@@ -58,7 +62,11 @@
         </ul>
       </div>
     </div>
-    <button class="menu-item--hamburguer" (click)="onShowMobileMenu()">
+    <button
+      class="menu-item--hamburguer"
+      (click)="onShowMobileMenu()"
+      aria-label="Open menu button"
+    >
       <i class="icon-menu">
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path
