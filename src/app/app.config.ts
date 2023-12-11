@@ -6,6 +6,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideDialogConfig } from '@ngneat/dialog';
 import { provideClientHydration } from '@angular/platform-browser';
+import { StoreModule, provideStore } from '@ngrx/store';
+import { favoritesReducer } from './state/reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideDialogConfig({}),
     provideClientHydration(),
+    provideStore(),
+    importProvidersFrom(StoreModule.forRoot({ favorites: favoritesReducer })),
   ],
 };

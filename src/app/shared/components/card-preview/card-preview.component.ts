@@ -1,5 +1,12 @@
-import { Component, Input, Optional } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Optional,
+  Output,
+} from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { ICharacter } from '../../../state/state';
 
 @Component({
   selector: 'app-card-preview',
@@ -10,4 +17,12 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 })
 export class CardPreviewComponent {
   @Input() data: any;
+  @Input() isFavorite!: boolean;
+  @Input() isDetails = false;
+  @Output() onFavoriteEvent = new EventEmitter<ICharacter>();
+
+  onFavorite(character: ICharacter, event: any): void {
+    event.stopPropagation();
+    this.onFavoriteEvent.emit(character);
+  }
 }

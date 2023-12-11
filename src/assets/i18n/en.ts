@@ -59,7 +59,7 @@ export default {
       },
     },
     buttons: {
-      cleanFilter: 'Clear',
+      cleanFilter: 'Clear',      
     },
   },
 };

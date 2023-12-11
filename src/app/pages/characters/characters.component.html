@@ -27,6 +27,28 @@
       <button class="button-filter--clear" (click)="clearFilter()">
         {{ "app.buttons.cleanFilter" | translate }}
       </button>
+
+      <button
+        class="button-filter--clear button-filter--favorite"
+        (click)="showFavorites()"
+        aria-label="Favorites"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="#c02121"
+          stroke="#c02121"
+        >
+          <path
+            d="M7 3C4.239 3 2 5.216 2 7.95C2 10.157 2.875 15.395 11.488 20.69C11.6423 20.7839 11.8194 20.8335 12 20.8335C12.1806 20.8335 12.3577 20.7839 12.512 20.69C21.125 15.395 22 10.157 22 7.95C22 5.216 19.761 3 17 3C14.239 3 12 6 12 6C12 6 9.761 3 7 3Z"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
     </ng-container>
   </app-header-template>
 
@@ -53,7 +75,12 @@
       </ng-container>
 
       <li *ngFor="let item of items" class="list-item">
-        <app-card-preview [data]="item" (click)="showDetail(item)" />
+        <app-card-preview
+          [data]="item"
+          (click)="showDetail(item)"
+          (onFavoriteEvent)="onFavorite($event)"
+          [isFavorite]="isFavorite(item.id)"
+        />
       </li>
 
       <ng-container *ngIf="loading">

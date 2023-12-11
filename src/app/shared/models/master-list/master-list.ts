@@ -30,6 +30,7 @@ export abstract class MasterList implements OnDestroy, OnInit {
   firstLoading = false;
   loading = false;
   showBackButton = false;
+  favoritesActive = false;
 
   protected subscriptions: Subscription[] = [];
 
@@ -60,7 +61,8 @@ export abstract class MasterList implements OnDestroy, OnInit {
     this.getQueryParams.filter = {
       ...filterObject,
     };
-
+    
+    this.favoritesActive = false;
     this.onGoTo(nextPage || 1);
   }
 
@@ -80,6 +82,7 @@ export abstract class MasterList implements OnDestroy, OnInit {
   }
 
   paginate(current: number, perPage: number, mergeContent = false): void {
+    this.favoritesActive = false;
     this.getQueryParams.pagination = {
       size: perPage,
       currentPage: current,
@@ -90,6 +93,7 @@ export abstract class MasterList implements OnDestroy, OnInit {
 
   private _getItems(mergeContent = false): void {
     this.loading = true;
+    this.favoritesActive = false;
 
     //TODO: uncomment to test the skeletons clearly
     // setTimeout(() => {
@@ -121,14 +125,15 @@ export abstract class MasterList implements OnDestroy, OnInit {
   }
 
   clearFilter() {
+    this.favoritesActive = false;
     Object.entries(this.filterForm.value).forEach(([name, value]) => {
       this.cleaningFilters = true;
       this.filterForm?.get(name)?.setValue(null);
     });
     delete this.getQueryParams.filter;
     this.items = [];
-    this.search();
     this.cleaningFilters = false;
+    this.search();
   }
 
   getDependency(nameDependency: string, path: string): void {
@@ -152,7 +157,8 @@ export abstract class MasterList implements OnDestroy, OnInit {
     if (
       !(this.current < this.finishPage) ||
       this.loading ||
-      !this.nextPageAvailable
+      !this.nextPageAvailable ||
+      this.favoritesActive
     )
       return;
 

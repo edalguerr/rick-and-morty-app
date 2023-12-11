@@ -1,7 +1,10 @@
 <div class="card-wrapper">
   <div class="card-content">
-    <div class="card-icon">
-      <i class="favorite-icon">
+    <div class="card-icon" (click)="onFavorite(data, $event)" *ngIf="!isDetails">
+      <i
+        class="favorite-icon"
+        [ngClass]="{ 'favorite-icon--active': isFavorite }"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

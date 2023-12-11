@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HeaderTemplateComponent } from '../../shared/components/header-template/header-template.component';
 import { SearchFilterComponent } from '../../shared/components/search-filter/search-filter.component';
 import { FilterGroupComponent } from '../../shared/components/filter-group/filter-group.component';
@@ -7,7 +7,7 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { CardPreviewComponent } from '../../shared/components/card-preview/card-preview.component';
 import dependencyFilters from './model/dependency-filters';
 import { TranslateModule } from '@ngx-translate/core';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { Observable, debounceTime, distinctUntilChanged } from 'rxjs';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { DialogService } from '@ngneat/dialog';
@@ -15,6 +15,10 @@ import { CharacterDetailComponent } from './components/character-detail/characte
 import { environment } from '../../../environments/development';
 import { MasterList } from '../../shared/models/master-list/master-list';
 import { HttpService } from '../../shared/services/http/http.service';
+import { Store } from '@ngrx/store';
+import { selectFavorites } from '../../state/selectors';
+import { ICharacter, State } from '../../state/state';
+import { favoriteActions } from '../../state/actions';
 
 const paths = environment.paths;
 
@@ -49,6 +53,9 @@ export default class CharactersComponent extends MasterList implements OnInit {
     label: 'app.pages.characters.header.searchFilter.label',
     placeholder: 'app.pages.characters.header.searchFilter.placeholder',
   };
+  favorites$: Observable<any>;
+  favoritesList: ICharacter[] = [];
+  isBrowser = false;
 
   get nameField(): FormControl {
     return this.filterForm.get('name') as FormControl;
@@ -57,10 +64,14 @@ export default class CharactersComponent extends MasterList implements OnInit {
   constructor(
     httpService: HttpService,
     @Inject('dependencies') dependencies: any[],
-    dialogService: DialogService
+    dialogService: DialogService,
+    private store: Store<State>,
+    @Inject(PLATFORM_ID) private platformId: any
   ) {
     super(httpService, `${paths.characters}`, dependencies, dialogService);
     this.loadForm();
+    this.isBrowser = isPlatformBrowser(platformId);
+    this.favorites$ = this.store.select(selectFavorites);
   }
 
   override ngOnInit(): void {
@@ -87,7 +98,25 @@ export default class CharactersComponent extends MasterList implements OnInit {
         });
 
       this.subscriptions.push(subNameFilter);
-    }    
+    }
+
+    if (this.isBrowser) {
+      const defaultFavorites =
+        localStorage.getItem('favorites') != 'undefined'
+          ? JSON.parse(localStorage.getItem('favorites') as any)
+          : [];
+
+      if (defaultFavorites?.length > 0)
+        this.store.dispatch(
+          favoriteActions.setDefault({ characters: defaultFavorites })
+        );
+    }
+
+    this.favorites$.subscribe((value) => {
+      this.favoritesList = value;
+      if (this.isBrowser)
+        localStorage.setItem('favorites', JSON.stringify(this.favoritesList));
+    });
   }
 
   private loadForm(): void {
@@ -101,9 +130,37 @@ export default class CharactersComponent extends MasterList implements OnInit {
 
   getFormControl(name: string): FormControl {
     return this.filterForm.get(name) as FormControl;
-  }  
+  }
 
   showDetail(data: any) {
     this.openDetailsDialog(CharacterDetailComponent, data);
+  }
+
+  onFavorite(character: ICharacter): void {
+    if (this.isFavorite(character.id)) {
+      this.store.dispatch(
+        favoriteActions.removeCharacter({ characterId: character.id })
+      );
+
+      return;
+    }
+
+    this.store.dispatch(favoriteActions.addCharacter({ character }));
+  }
+
+  isFavorite(characterId: number): boolean {
+    return !!this.favoritesList.find((value) => value.id === characterId);
+  }
+
+  showFavorites(): void {
+    this.favoritesActive = true;
+    this.items = this.favoritesList;    
+
+    Object.entries(this.filterForm.value).forEach(([name, value]) => {
+      this.cleaningFilters = true;
+      this.filterForm?.get(name)?.setValue(null);
+    });
+
+    this.cleaningFilters = false;
   }
 }

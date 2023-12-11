@@ -37,14 +37,17 @@
         position: absolute;
         top: 1rem;
         z-index: 2;
-        svg {
-            stroke: rgb(192, 33, 33);
-            fill: none;
-        }
 
-        &--filled {
+        .favorite-icon {
             svg {
-                fill: rgb(192, 33, 33);
+                stroke: #c02121;
+                fill: none;
+            }
+
+            &--active {
+                svg {
+                    fill: rgb(192, 33, 33);
+                }
             }
         }
     }
