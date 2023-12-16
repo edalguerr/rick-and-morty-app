@@ -84,6 +84,7 @@ export default class CharactersComponent extends MasterList implements OnInit {
         !this.cleaningFilters
       ) {
         this.search();
+        this.favoritesActive = false;
       }
     });
     this.subscriptions.push(subForm);
@@ -92,7 +93,12 @@ export default class CharactersComponent extends MasterList implements OnInit {
       const subNameFilter = this.nameField.valueChanges
         .pipe(debounceTime(500), distinctUntilChanged())
         .subscribe((value) => {
-          if (!this.cleaningFilters) this.search();
+          if (!this.cleaningFilters) {
+            if (this.favoritesActive && value === null) return;
+
+            this.search();
+            this.favoritesActive = false;
+          }
         });
 
       this.subscriptions.push(subNameFilter);
@@ -159,6 +165,6 @@ export default class CharactersComponent extends MasterList implements OnInit {
       this.filterForm?.get(name)?.setValue(null);
     });
 
-    this.cleaningFilters = false;    
+    this.cleaningFilters = false;
   }
 }
