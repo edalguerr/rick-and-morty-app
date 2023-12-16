@@ -58,6 +58,7 @@
       infiniteScroll
       [infiniteScrollDistance]="2"
       [infiniteScrollThrottle]="50"
+      [alwaysCallback]="true"
       (scrolled)="onScroll()"
     >
       <ng-container *ngIf="firstLoading">
